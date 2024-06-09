@@ -1,13 +1,16 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
+import LoginForm from './LoginForm';
+import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-
-export function LoginPage() {
+export default async function LoginPage() {
+	const sesion = await getServerSession();
+	if (sesion) {
+		redirect('/dashboard');
+	}
 	return (
-		<div className="flex item-center gap-x-12 2xl:gap-x-36 h-full w-full justify-center">
+		<section className="flex items-center h-full w-full justify-center max-h-screen">
 			<div className="flex w-full h-full items-center justify-center my-auto">
 				<div className="mx-auto grid w-full max-w-md gap-6 lg:text-lg">
 					<div className="grid gap-2 text-center drop-shadow-lg">
@@ -15,70 +18,32 @@ export function LoginPage() {
 							Login
 						</h1>
 						<p className="text-balance text-muted-foreground">
-							Enter your email below to login to
-							your account
+							Enter your username and password below
+							to login to your account
 						</p>
 					</div>
-					<div className="grid gap-4">
-						<div className="grid gap-2">
-							<Label htmlFor="email">Email</Label>
-							<Input
-								id="email"
-								type="email"
-								placeholder="m@example.com"
-								required
-							/>
-						</div>
-						<div className="grid gap-2">
-							<div className="flex items-center">
-								<Label htmlFor="password">
-									Password
-								</Label>
-								<Link
-									href="/forgot-password"
-									className="ml-auto inline-block text-sm underline"
-								>
-									Forgot your password?
-								</Link>
-							</div>
-							<Input
-								id="password"
-								type="password"
-								required
-							/>
-						</div>
-						<Button
-							variant="default"
-							className="w-full"
-						>
-							<Link
-								href="/dashboard"
-								className="w-full"
-							>
-								Login
-							</Link>
-						</Button>
-					</div>
-					<div className="mt-4 text-center text-sm">
-						Don&apos;t have an account?{' '}
+					<LoginForm />
+					<div className="mt-4 text-center px-6">
+						Don&apos;t have an account?
 						<Link
-							href="#"
-							className="underline lg:text-lg"
+							href="/signup"
+							className="hover:underline lg:text-lg text-accent"
 						>
-							Sign up
+							<p>Sign up</p>
 						</Link>
 					</div>
 				</div>
 			</div>
-			<div className="hidden bg-transparent lg:flex w-full h-full">
+			<div className="hidden bg-transparent lg:flex max-h-[900px] 2xl:max-h-[1378px] 2xl:mr-32">
 				<Image
 					src="/hardware.jpg"
 					alt="Image"
 					width={768}
 					height={1378}
+					priority
 					className="h-full w-full max-h-[1378px] max-w-[768px] object-cover dark:brightness-[0.5] dark:grayscale rounded-lg"
 				/>
 			</div>
-		</div>
+		</section>
 	);
 }

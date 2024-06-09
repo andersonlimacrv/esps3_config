@@ -2,7 +2,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
-import ThemeProvider from '@/components/theme-provider.jsx';
+import ThemeProvider from '@/components/theme-provider';
+import Toast from '@/components/ui/Toast';
 
 export const metadata = {
 	title: 'IoT ES32 - S3 Configuration Tool',
@@ -11,7 +12,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
 				<ThemeProvider
 					attribute="class"
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
 					disableTransitionOnChange
 				>
 					{children}
+					<Toast />
 				</ThemeProvider>
 			</body>
 		</html>
