@@ -6,6 +6,8 @@ import { TbTemplate } from 'react-icons/tb';
 import { GiArmorUpgrade } from 'react-icons/gi';
 import { MdOutlineShoppingCartCheckout } from 'react-icons/md';
 
+export const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const sizeIcons = 'h-6 w-6 drop-shadow-lg';
 
 export const sidebarData = [

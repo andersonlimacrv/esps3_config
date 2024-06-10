@@ -28,6 +28,7 @@ export default function LoginForm() {
 			if (!res?.error) {
 				toast.success('User logged in successfully');
 				router.push('/dashboard');
+				router.refresh();
 			} else {
 				toast.error(res.error);
 			}

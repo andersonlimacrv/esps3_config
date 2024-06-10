@@ -3,11 +3,9 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 
 
 const authHandler = NextAuth({
-    session: {
-        strategy: 'jwt',
-    },
     pages: {
         signIn: '/',
+        error: '/',
         signOut: '/',
     },
     providers: [
@@ -32,13 +30,14 @@ const authHandler = NextAuth({
                         body: formData.toString(),
                     }
                 );
-                let data = await res.json();
-                if (data.detail) {
-                    throw new Error(data.detail)
+                let user = await res.json();
+                if (user.detail) {
+                    throw new Error(user.detail)
                 }
 
-                if (data.access_token) {
-                    return { ...data };
+                if (user.access_token) {
+                    return { ...user, username: credentials.username };
+
                 } else {
                     return false
                 }
@@ -46,6 +45,22 @@ const authHandler = NextAuth({
             },
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
+    session: {
+        strategy: 'jwt',
+    },
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.user = user;
+            }
+            return { ...token };
+        },
+        async session({ session, token }) {
+            session.user = token.user;
+            return session;
+        }
+    },
 });
 
 export { authHandler as GET, authHandler as POST };
