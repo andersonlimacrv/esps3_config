@@ -44,7 +44,6 @@ export default function AvatarUser() {
 			);
 			if (res) {
 				const data = await res.json();
-				console.log(data);
 				setProfile(data);
 			}
 		}

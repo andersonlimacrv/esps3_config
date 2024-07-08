@@ -9,7 +9,7 @@ export default function LogoArea({ isOpen }) {
 				href="/"
 				className="flex items-center gap-2 font-semibold"
 			>
-				<PiCodeDuotone className="h-8 w-8" />
+				<PiCodeDuotone className="ml-[10px] h-8 w-8" />
 				<span
 					className={`text-2xl tracking-wide whitespace-nowrap transition-opacity duration-300 ${
 						isOpen ? 'opacity-100' : 'opacity-0 hidden'

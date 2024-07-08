@@ -41,11 +41,9 @@ export default function RegisterForm() {
 
 			if (res.ok) {
 				toast.success('User created successfully');
-				console.log(json);
 				router.push('/');
 			} else {
 				toast.error(`${json.detail}`);
-				console.log(json);
 			}
 		} catch (error) {
 			toast.error(
