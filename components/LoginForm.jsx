@@ -30,7 +30,9 @@ export default function LoginForm() {
 				router.push('/dashboard');
 				router.refresh();
 			} else {
-				toast.error(res.error);
+				if (res.status === 401) {
+					toast.error('Invalid username or password');
+				} else toast.error(res.error);
 			}
 		} catch (error) {
 			console.error('Error:', error);
