@@ -51,12 +51,12 @@ export default function SidebarMobile() {
 													href={
 														item.href
 													}
-													className={`flex items-center gap-4 px-4 py-2 rounded-lg hover:bg-primary-foreground ${
+													className={`flex items-center gap-4 px-4 py-2 rounded-lg  ${
 														isActive(
 															item.href
 														)
 															? 'bg-accent'
-															: ''
+															: 'hover:bg-primary-foreground'
 													}`}
 												>
 													<div className="px-2">
@@ -65,12 +65,12 @@ export default function SidebarMobile() {
 														}
 													</div>
 													<span
-														className={`capitalize pl-0 sm:pl-2 text-lg font-medium transition-all duration-200 group-hover:translate-x-2 group-hover:text-muted-foreground ${
+														className={`capitalize pl-0 sm:pl-2 text-lg font-medium transition-all duration-200 ${
 															isActive(
 																item.href
 															)
-																? 'translate-x-2 text-muted-foreground'
-																: ''
+																? 'text-muted'
+																: 'group-hover:translate-x-2 group-hover:text-accent'
 														}`}
 													>
 														{

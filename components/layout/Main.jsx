@@ -22,9 +22,10 @@ export default function MainRight({ children }) {
 
 	return (
 		<>
-			<header className="flex h-16 items-center gap-2 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+			<header className="flex h-16 items-center gap-2 border-b bg-muted/40 px-4 lg:px-6">
 				<SidebarMobile />
-				<div className="w-full flex-1">links...</div>
+				{/* WIP */}
+				<div className="w-full flex-1 "></div>
 				<ModeToggle />
 				<AvatarUser />
 			</header>

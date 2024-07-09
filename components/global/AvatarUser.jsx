@@ -1,5 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import { decodePayload } from '@/lib/token';
 import React, { useState, useEffect } from 'react';
 import { signOut } from 'next-auth/react';
@@ -13,8 +14,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { fetchUser } from '@/components/actions/fetchUser';
-import { BACKEND_URL } from '@/constants';
+import { fetchUserById } from '@/actions/User';
 
 export default function AvatarUser() {
 	const { data: session } = useSession();
@@ -36,12 +36,7 @@ export default function AvatarUser() {
 
 	const fetchUserData = async () => {
 		if (userId) {
-			const res = await fetchUser(
-				`${BACKEND_URL}/users/${userId}`,
-				{
-					method: 'GET',
-				}
-			);
+			const res = await fetchUserById(userId);
 			if (res) {
 				const data = await res.json();
 				setProfile(data);
@@ -78,6 +73,18 @@ export default function AvatarUser() {
 						</div>
 					</DropdownMenuLabel>
 					<DropdownMenuSeparator />
+					{profile && profile.role === 'admin' && (
+						<DropdownMenuItem>
+							<Link
+								href={'/admin'}
+								className="w-full"
+							>
+								<p className="uppercase cursor-pointer">
+									Admin Panel
+								</p>
+							</Link>
+						</DropdownMenuItem>
+					)}
 					<DropdownMenuItem>
 						<p className="cursor-pointer w-full">
 							Settings

@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Dashboard() {
-	return <div>Dashboard</div>;
+	return <section className="p-1 lg:p-4">Dashboard</section>;
 }

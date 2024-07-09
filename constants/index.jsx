@@ -1,10 +1,7 @@
-import { CgFormatLeft } from 'react-icons/cg';
-import { MdOutlineMessage } from 'react-icons/md';
-import { RiNewspaperLine } from 'react-icons/ri';
 import { VscGraph } from 'react-icons/vsc';
-import { TbTemplate } from 'react-icons/tb';
-import { GiArmorUpgrade } from 'react-icons/gi';
-import { MdOutlineShoppingCartCheckout } from 'react-icons/md';
+import { IoMdAddCircle } from 'react-icons/io';
+import { TbDeviceDesktopAnalytics } from 'react-icons/tb';
+import { TiThListOutline } from 'react-icons/ti';
 
 export const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -16,9 +13,11 @@ export const sidebarData = [
 		category: 'Dashboard',
 		items: [
 			{
-				title: 'My Forms',
+				title: 'Live View',
 				href: '/dashboard',
-				icon: <CgFormatLeft className={sizeIcons} />,
+				icon: (
+					<TbDeviceDesktopAnalytics className={sizeIcons} />
+				),
 				submenu: true,
 				submenuItems: [
 					{
@@ -28,20 +27,8 @@ export const sidebarData = [
 				],
 			},
 			{
-				title: 'Responses',
-				href: '/dashboard/responses',
-				icon: <MdOutlineMessage className={sizeIcons} />,
-				submenu: true,
-				submenuItems: [
-					{
-						title: 'Dashboard',
-						href: '/item1',
-					},
-				],
-			},
-			{
-				title: 'Analitics',
-				href: '/dashboard/metrics',
+				title: 'History',
+				href: '/dashboard/reading',
 				icon: <VscGraph className={sizeIcons} />,
 				submenu: true,
 				submenuItems: [
@@ -55,12 +42,12 @@ export const sidebarData = [
 	},
 	{
 		_categoryId: 1,
-		category: 'Plan',
+		category: 'Enterprise',
 		items: [
 			{
-				title: 'Upgrade',
-				href: '/plan/upgrade',
-				icon: <GiArmorUpgrade className={sizeIcons} />,
+				title: 'Show All',
+				href: '/dashboard/enterprise',
+				icon: <TiThListOutline className={sizeIcons} />,
 				submenu: true,
 				submenuItems: [
 					{
@@ -70,31 +57,27 @@ export const sidebarData = [
 				],
 			},
 			{
-				title: 'Current',
-				href: '/plan/current',
-				icon: <RiNewspaperLine className={sizeIcons} />,
+				title: 'Add New',
+				href: '/dashboard/enterprise/add',
+				icon: <IoMdAddCircle className={sizeIcons} />,
 				submenu: false,
 			},
 		],
 	},
 	{
 		_categoryId: 2,
-		category: 'Templates',
+		category: 'DEVICES',
 		items: [
 			{
-				title: 'My Templates',
-				href: '/energia',
-				icon: <TbTemplate className={sizeIcons} />,
+				title: 'Show All',
+				href: '/dashboard/devices',
+				icon: <TiThListOutline className={sizeIcons} />,
 				submenu: false,
 			},
 			{
-				title: 'Galery',
-				href: '/Alarmes',
-				icon: (
-					<MdOutlineShoppingCartCheckout
-						className={sizeIcons}
-					/>
-				),
+				title: 'Add New',
+				href: '/dashboard/devices/add',
+				icon: <IoMdAddCircle className={sizeIcons} />,
 				submenu: false,
 			},
 		],

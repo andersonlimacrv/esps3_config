@@ -7,7 +7,7 @@ import { FaAngleDoubleLeft } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import LogoArea from '@/components/layout/LogoArea';
 
-function Sidebar() {
+export default function Sidebar() {
 	const pathname = usePathname();
 	const isActive = (href) => {
 		return pathname === href;
@@ -51,7 +51,7 @@ function Sidebar() {
 								}`}
 							>
 								<li
-									className={`py-1 dark:text-[#243949] text-[#24394955] text-center font-semibold uppercase tracking-widest ${
+									className={`py-1 dark:text-[#243949] text-[#24394955] text-center font-semibold uppercase tracking-widest drop-shadow-lg ${
 										isOpen
 											? ''
 											: 'hidden'
@@ -64,7 +64,7 @@ function Sidebar() {
 									(item, index) => (
 										<li
 											key={index}
-											className="py-1 font-normal text-[16px] w-full flex items-center gap-x-1.5 group select-none "
+											className="py-1 font-normal text-[16px] w-full flex items-center gap-x-1.5 group select-none capitalize "
 										>
 											<div
 												className={`px-1 rounded-xl h-10 bg-transparent relative overflow-hidden ${
@@ -99,7 +99,7 @@ function Sidebar() {
 													}
 												</div>
 												<span
-													className={`capitalize pl-0 sm:pl-2 text-sm lg:text-[16px] font-medium transition-all duration-200 ${
+													className={`pl-0 sm:pl-2 text-[15px] font-medium transition-all duration-200 ${
 														isOpen
 															? 'inline-block translate-x-0 group-hover:translate-x-1'
 															: 'hidden'
@@ -121,5 +121,3 @@ function Sidebar() {
 		</>
 	);
 }
-
-export default Sidebar;
