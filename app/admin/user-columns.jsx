@@ -2,9 +2,12 @@
 import { FaCheck } from 'react-icons/fa';
 import { MdBlock, MdContentCopy } from 'react-icons/md';
 import { FaTrashCan } from 'react-icons/fa6';
-import Checked from '@/components/global/Checked';
+import { MoreHorizontal, ArrowUpDown } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { MoreHorizontal } from 'lucide-react';
+
+import { deleteUserById, AllowUser } from '@/actions/User';
+
+import Checked from '@/components/global/Checked';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -14,7 +17,8 @@ import {
 	DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { deleteUserById, AllowUser } from '@/actions/User';
+import { Checkbox } from '@/components/ui/checkbox';
+import { DataTableColumnHeader } from '@/components/admin/table-column-header';
 
 export const deleteUser = async (userId) => {
 	const response = await deleteUserById(userId);
@@ -46,15 +50,71 @@ export const handleCopyUserId = (userId) => {
 
 export const UserColumns = [
 	{
+		id: 'select',
+		header: ({ table }) => (
+			<Checkbox
+				checked={
+					table.getIsAllPageRowsSelected() ||
+					(table.getIsSomePageRowsSelected() &&
+						'indeterminate')
+				}
+				onCheckedChange={(value) =>
+					table.toggleAllPageRowsSelected(!!value)
+				}
+				aria-label="Select all"
+				className="mx-4"
+			/>
+		),
+		cell: ({ row }) => (
+			<Checkbox
+				checked={row.getIsSelected()}
+				onCheckedChange={(value) => row.toggleSelected(!!value)}
+				aria-label="Select row"
+			/>
+		),
+		enableSorting: false,
+		enableHiding: false,
+	},
+	{
 		accessorKey: 'username',
-		header: 'Username',
+		header: ({ column }) => {
+			return (
+				<Button
+					variant="ghost"
+					className="w-full text-lg"
+					onClick={() =>
+						column.toggleSorting(
+							column.getIsSorted() === 'asc'
+						)
+					}
+				>
+					Username
+					<ArrowUpDown className="ml-2 h-4 w-4" />
+				</Button>
+			);
+		},
 		cell: ({ getValue }) => {
 			return <div className="text-center">{getValue()}</div>;
 		},
 	},
 	{
 		accessorKey: 'email',
-		header: 'Email',
+		header: ({ column }) => {
+			return (
+				<Button
+					variant="ghost"
+					className="w-full text-lg"
+					onClick={() =>
+						column.toggleSorting(
+							column.getIsSorted() === 'asc'
+						)
+					}
+				>
+					Email
+					<ArrowUpDown className="ml-2 h-4 w-4" />
+				</Button>
+			);
+		},
 	},
 	{
 		accessorKey: 'role',
@@ -62,7 +122,9 @@ export const UserColumns = [
 	},
 	{
 		accessorKey: 'created_at',
-		header: 'Created At',
+		header: ({ column }) => (
+			<DataTableColumnHeader column={column} title="Created at" />
+		),
 		cell: ({ row }) => {
 			let date = new Date(row.getValue('created_at'));
 			let formatted = date.toLocaleString('pt-BR', {
@@ -75,7 +137,9 @@ export const UserColumns = [
 	},
 	{
 		accessorKey: 'updated_at',
-		header: 'Last Updated',
+		header: ({ column }) => (
+			<DataTableColumnHeader column={column} title="Updated at" />
+		),
 		cell: ({ row }) => {
 			let date = new Date(row.getValue('created_at'));
 			let formatted = date.toLocaleString('pt-BR', {
