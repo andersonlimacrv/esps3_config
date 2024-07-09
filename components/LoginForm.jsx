@@ -26,13 +26,16 @@ export default function LoginForm() {
 				password,
 			});
 			if (!res?.error) {
-				toast.success('User logged in successfully');
+				toast.success('User logged in successfully.');
 				router.push('/dashboard');
 				router.refresh();
 			} else {
 				if (res.status === 401) {
-					toast.error('Invalid username or password');
-				} else toast.error(res.error);
+					toast.error(res.error);
+				} else
+					toast.error(
+						`Oops! 👀 Something went wrong. ${res.error}`
+					);
 			}
 		} catch (error) {
 			console.error('Error:', error);

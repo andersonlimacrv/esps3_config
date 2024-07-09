@@ -40,10 +40,10 @@ export default function RegisterForm() {
 			const json = await res.json();
 
 			if (res.ok) {
-				toast.success('User created successfully');
+				toast.success('User created successfully.');
 				router.push('/');
 			} else {
-				toast.error(`${json.detail}`);
+				toast.error(`${json.detail}.`);
 			}
 		} catch (error) {
 			toast.error(

@@ -23,10 +23,9 @@ export default function AdminPage() {
 		const fetchData = async () => {
 			try {
 				const result = await getData();
-				console.log(result);
 				setData(result.users);
 			} catch (error) {
-				toast.error('Error fetching data');
+				toast.error('Error fetching data.');
 			} finally {
 				setLoading(false);
 			}
@@ -38,12 +37,12 @@ export default function AdminPage() {
 	return (
 		<section className="flex flex-col p-1 lg:p-4 mx-auto gap-y-2">
 			<Card className="flex justify-center">
-				<h1 className="text-primary drop-shadow-1xl text-3xl font-bold py-1 mx-6">
+				<h1 className="text-primary drop-shadow-1xl text-3xl font-bold py-1 mx-8">
 					All Users
 				</h1>
 				<div className="flex flex-1"></div>
 			</Card>
-			<Card className="flex min-w-[40rem] min-h-36 justify-center items-center mx-auto">
+			<Card className="flex w-[75vw] min-h-36 justify-center items-center mx-auto">
 				{isLoading ? (
 					<MediumLoader />
 				) : (
