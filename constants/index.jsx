@@ -4,6 +4,7 @@ import { TbDeviceDesktopAnalytics } from 'react-icons/tb';
 import { TiThListOutline } from 'react-icons/ti';
 
 export const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
+export const WEBSOCKET_URL = `${process.env.NEXT_PUBLIC_WS_URL}`;
 
 const sizeIcons = 'h-6 w-6 drop-shadow-lg';
 

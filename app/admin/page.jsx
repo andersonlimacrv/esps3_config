@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import DataTable from '@/components/admin/data-table';
 import { UserColumns } from './user-columns';
@@ -19,36 +19,36 @@ export default function AdminPage() {
 	const [data, setData] = useState([]);
 	const [isLoading, setLoading] = useState(true);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const result = await getData();
-				setData(result.users);
-			} catch (error) {
-				toast.error('Error fetching data.');
-			} finally {
-				setLoading(false);
-			}
-		};
+	const refetchData = useCallback(async () => {
+    try {
+      const result = await getData();
+      setData(result.users);
+    } catch (error) {
+      toast.error("Error fetching data.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-		fetchData();
-	}, []);
+  useEffect(() => {
+    refetchData();
+  }, [refetchData]);
 
 	return (
-		<section className="flex flex-col p-1 lg:p-4 mx-auto gap-y-2">
-			<Card className="flex w-[75vw] min-h-36 justify-center items-center mx-auto">
-				{isLoading ? (
-					<MediumLoader />
-				) : (
-					<DataTable
-						title="All Users"
-						filterColumn="username"
-						columns={UserColumns}
-						data={data}
-						showColumns={true}
-					/>
-				)}
-			</Card>
-		</section>
-	);
+    <section className="flex flex-col p-1 lg:p-4 mx-auto gap-y-2">
+      <Card className="flex w-[75vw] min-h-36 justify-center items-center mx-auto">
+        {isLoading ? (
+          <MediumLoader />
+        ) : (
+          <DataTable
+            title="All Users"
+            filterColumn="username"
+            columns={UserColumns(refetchData)}
+            data={data}
+            showColumns={true}
+          />
+        )}
+      </Card>
+    </section>
+  );
 }

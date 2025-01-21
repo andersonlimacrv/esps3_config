@@ -48,7 +48,7 @@ export const handleCopyUserId = (userId) => {
 	toast.success(`User ID ${userId} copied to clipboard.`);
 };
 
-export const UserColumns = [
+export const UserColumns = (refetchData) => [
 	{
 		id: 'select',
 		header: ({ table }) => (
@@ -167,80 +167,70 @@ export const UserColumns = [
 		cell: ({ row }) => {
 			const user = row.original;
 			return (
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button
-							variant="ghost"
-							className="h-8 w-8 p-0"
-						>
-							<span className="sr-only">
-								Open menu
-							</span>
-							<MoreHorizontal className="h-4 w-4" />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent
-						align="end"
-						className="text-center"
-					>
-						<DropdownMenuLabel>
-							Actions
-						</DropdownMenuLabel>
-						<DropdownMenuItem
-							onClick={() =>
-								handleCopyUserId(user.id)
-							}
-							className="cursor-pointer group"
-						>
-							<span className="flex justify-between w-full gap-x-4">
-								Copy User ID
-								<MdContentCopy className="h-4 w-4 ml-auto inline group-hover:text-muted" />
-							</span>
-						</DropdownMenuItem>
-						<DropdownMenuItem
-							onClick={() =>
-								handleCopyUsername(
-									user.username
-								)
-							}
-							className="cursor-pointer group"
-						>
-							<span className="flex justify-between w-full gap-x-4">
-								Copy Username
-								<MdContentCopy className="h-4 w-4 ml-auto inline group-hover:text-muted" />
-							</span>
-						</DropdownMenuItem>
-						<DropdownMenuSeparator />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="text-center">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => handleCopyUserId(user.id)}
+              className="cursor-pointer group"
+            >
+              <span className="flex justify-between w-full gap-x-4">
+                Copy User ID
+                <MdContentCopy className="h-4 w-4 ml-auto inline group-hover:text-muted" />
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => handleCopyUsername(user.username)}
+              className="cursor-pointer group"
+            >
+              <span className="flex justify-between w-full gap-x-4">
+                Copy Username
+                <MdContentCopy className="h-4 w-4 ml-auto inline group-hover:text-muted" />
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
 
-						<DropdownMenuItem
-							onClick={() => updateUser(user.id)}
-							className="cursor-pointer group"
-						>
-							{user.is_active ? (
-								<span className="flex justify-between w-full">
-									Disable{' '}
-									<MdBlock className="h-4 w-4 group-hover:text-red-500 inline" />
-								</span>
-							) : (
-								<span className="flex justify-between w-full">
-									Enable{' '}
-									<FaCheck className="h-4 w-4 group-hover:text-green-500 inline" />
-								</span>
-							)}
-						</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () => {
+                await updateUser(user.id);
+                refetchData(); 
+              }}
+              className="cursor-pointer group"
+            >
+              {user.is_active ? (
+                <span className="flex justify-between w-full">
+                  Disable{" "}
+                  <MdBlock className="h-4 w-4 group-hover:text-red-500 inline" />
+                </span>
+              ) : (
+                <span className="flex justify-between w-full">
+                  Enable{" "}
+                  <FaCheck className="h-4 w-4 group-hover:text-green-500 inline" />
+                </span>
+              )}
+            </DropdownMenuItem>
 
-						<DropdownMenuItem
-							className="cursor-pointer group"
-							onClick={() => deleteUser(user.id)}
-						>
-							<span className="flex justify-between w-full">
-								Delete{' '}
-								<FaTrashCan className="ml-auto group-hover:text-red-500" />
-							</span>
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
-			);
+            <DropdownMenuItem
+              className="cursor-pointer group"
+              onClick={async () => {
+                await deleteUser(user.id);
+                refetchData();
+              }}
+            >
+              <span className="flex justify-between w-full">
+                Delete{" "}
+                <FaTrashCan className="ml-auto group-hover:text-red-500" />
+              </span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
 		},
 	},
 ];
