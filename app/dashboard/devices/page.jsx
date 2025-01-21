@@ -5,7 +5,8 @@ import { useWebSocket } from "@/context/WebSocketContext";
 import { Button } from "@/components/ui/button";
 
 export default function DevicesPage() {
-  const { messages = [], sendMessage, connected } = useWebSocket("carambolas");
+  const endpoint = "carambolas";
+  const { messages = [], sendMessage, connected } = useWebSocket(endpoint);
   const [input, setInput] = useState("");
 
   const handleSendMessage = () => {
@@ -18,6 +19,9 @@ export default function DevicesPage() {
   return (
     <div className="flex flex-col items-center w-full">
       <h1 className="text-2xl font-bold mb-4">Devices WebSocket</h1>
+      <p className="mb-4 text-gray-600 dark:text-gray-400">
+        <b>Endpoint:</b> {endpoint}
+      </p>
 
       <div className="mb-4 flex gap-2">
         <input
