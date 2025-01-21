@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useWebSocket } from "@/context/WebSocketContext";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function DevicesPage() {
   const endpoint = "carambolas";
@@ -24,9 +25,8 @@ export default function DevicesPage() {
       </p>
 
       <div className="mb-4 flex gap-2">
-        <input
+        <Input
           type="text"
-          className="border p-2 flex-grow rounded"
           placeholder="Type a message"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -34,14 +34,13 @@ export default function DevicesPage() {
         <Button
           onClick={handleSendMessage}
           variant="ghost"
-          className="px-4 py-6"
           disabled={!connected}
         >
           Send
         </Button>
       </div>
 
-      <div className="border p-4 max-h-64 overflow-y-auto rounded w-full max-w-2xl">
+      <div className="border p-4 max-h-64 overflow-y-auto rounded-md w-full max-w-2xl">
         <h2 className="text-lg font-semibold mb-2">Messages:</h2>
         {messages.length === 0 ? (
           <p>No messages yet</p>

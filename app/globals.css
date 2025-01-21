@@ -1,75 +1,83 @@
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  @layer base {
-    :root {
-        --background: 260 97% 97%;
-        --foreground: 219 3.4000000000000004% 0.88%;
-        --card: 219 62.8% 92.2%;
-        --card-foreground: 219 3.4000000000000004% 1.1%;
-        --popover: 220 20% 88%;
-        --popover-foreground: 219 3.4000000000000004% 1.1%;
-        --primary: 219 34% 22%;
-        --primary-foreground: 210 40% 98%;
-        --muted: 220 10% 88%;
-        --muted-foreground: 219, 13%, 20%;
-        --secondary: 219 1.7000000000000002% 96.1%;
-        --secondary-foreground: 219 3.04% 12.2%;
-        --accent: 190, 100%, 40%;
-        --accent-foreground: 219 3.04% 12.2%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 214.3 31.8% 86.4%;
-        --input: 214.3 31.8% 91.4%;
-        --ring: 222.2 84% 4.9%;
-        --radius: 0.5rem;
-    }
-
-    .dark {
-        --background: 216, 14%, 14%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 10%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 0%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground:220, 10%, 65%;
-        --accent: 190, 100%, 40%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 200, 34%,17%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%; 
-    }
+@layer base {
+  :root {
+    --background: 260 97% 97%;
+    --foreground: 219 3.4000000000000004% 0.88%;
+    --card: 219 62.8% 92.2%;
+    --card-foreground: 219 3.4000000000000004% 1.1%;
+    --popover: 220 20% 88%;
+    --popover-foreground: 219 3.4000000000000004% 1.1%;
+    --primary: 219 34% 22%;
+    --primary-foreground: 210 40% 98%;
+    --muted: 220 10% 88%;
+    --muted-foreground: 219, 13%, 20%;
+    --secondary: 219 1.7000000000000002% 96.1%;
+    --secondary-foreground: 219 3.04% 12.2%;
+    --accent: 190, 100%, 40%;
+    --accent-foreground: 219 3.04% 12.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214.3 31.8% 86.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+  .dark {
+    --background: 216, 14%, 14%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 220, 10%, 65%;
+    --accent: 190, 100%, 40%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 200, 34%, 17%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
   }
+}
 
-  .scroolbar::-webkit-scrollbar, body::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;               /* width of the entire scrollbar */ 
+@layer base {
+  * {
+    @apply border-border;
   }
-  
-  .scroolbar::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
-    background: var(--glass-background);
-            /* color of the tracking area */ 
+  body {
+    @apply bg-background text-foreground;
   }
-  
-  .scroolbar::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
-    background-color: var(--muted-foreground);    /* color of the scroll thumb */ 
-    border-radius: 10px;       /* roundness of the scroll thumb */ 
-    border: 1px solid var(--glass-background);  /* creates padding around scroll thumb */ 
+  input:-webkit-autofill {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--background)) !important;
+    box-shadow: 0 0 0px 1000px hsl(var(--muted)) inset !important;
   }
+}
+
+.scroolbar::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px; /* width of the entire scrollbar */
+}
+
+.scroolbar::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--glass-background);
+  /* color of the tracking area */
+}
+
+.scroolbar::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: var(--muted-foreground); /* color of the scroll thumb */
+  border-radius: 10px; /* roundness of the scroll thumb */
+  border: 1px solid var(--glass-background); /* creates padding around scroll thumb */
+}
